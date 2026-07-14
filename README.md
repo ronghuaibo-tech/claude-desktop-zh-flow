@@ -41,6 +41,40 @@ Windows 上请直接使用上游项目提供的 Windows 安装脚本。本仓库
 - **补丁仓库路径更灵活**：支持 `CLAUDE_ZH_PATCHER_ROOT`，也会自动查找当前工作区和历史常用目录。
 - **重复流程固化为 Codex skill**：把“开始流程”“更新好了”“自检”“备份维护”等操作封装成可复用流程，减少每次手动记命令的成本。
 
+## 前置条件
+
+macOS 使用本流程前，需要满足：
+
+- 已安装 Claude Desktop。
+- `/Applications/Claude.app` 存在。
+- 至少保留过一个官方 Anthropic 签名的 Claude 备份，命名类似 `Claude.backup-before-zh-CN-*.app`。
+- 本地有上游补丁仓库 `javaht/claude-desktop-zh-cn`。
+- 当前用户有权限替换 `/Applications/Claude.app`。
+
+Windows 使用者不需要本仓库的 macOS helper，直接运行上游 Windows 安装脚本即可。
+
+## 已知限制
+
+- 安全模式默认跳过 asar 在线页面注入，因此部分在线页面、动态弹窗或新功能文案仍可能显示英文。
+- Claude Desktop 每次官方更新后，都建议先恢复官方签名版本，再更新，再重新打补丁。
+- `audit` 只能帮助定位疑似漏英字符串，不能自动判断哪些品牌名、技术名或变量模板应保留英文。
+- 本仓库不包含 Claude Desktop 应用本体，不分发 Anthropic 或上游项目的资源文件。
+
+## 安全说明
+
+- 不要把 GitHub token、个人访问令牌、账号密码或本机私密配置提交到仓库。
+- 不要提交 `/Applications/Claude.app`、备份出来的 `.app` 包或用户配置目录。
+- `prune-backups` 默认只预览，不删除；只有加 `--delete` 才会移除备份。
+- 如果曾经把 token 粘贴到公开位置，请立即在 GitHub 设置中撤销并重新生成。
+
+## 许可与再分发说明
+
+本仓库是个人维护流程包装器，不是 Anthropic 官方工具。
+
+自检时未在上游 `javaht/claude-desktop-zh-cn` 仓库中检测到明确 license 信息，因此请尊重上游项目的实际授权边界。本仓库只提交流程脚本、Codex skill 描述和使用说明，不提交 Claude Desktop 应用文件，也不重新分发上游翻译资源。
+
+如果你计划将本仓库作为公开项目长期维护，建议在确认上游授权兼容后，再补充明确的 `LICENSE` 文件。
+
 ## English Summary
 
 On macOS, this repository provides a repeatable restore -> update -> re-patch workflow for Claude Desktop. It restores an official Anthropic-signed `Claude.app`, lets the user update Claude Desktop manually, then reapplies the zh-CN patch in safe mode.
