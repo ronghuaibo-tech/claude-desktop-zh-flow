@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Desktop 汉化流程"
+  short_description: "恢复、更新并重新汉化 Claude Desktop。"
+  default_prompt: "按 Claude Desktop 汉化流程开始：先恢复官方版让我手动更新，更新后再重新汉化。"
